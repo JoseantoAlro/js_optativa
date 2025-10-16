@@ -3,8 +3,8 @@ function $(selector){
 }
 
 function revelarSig(actual){ 
-    actual.parentElement.nextElementSibling.classList.toggle("oculto");
-    actual.parentElement.nextElementSibling.classList.toggle("visible"); //el togle nos servirta para el boton falso de siguiente check check
+    actual.parentElement.nextElementSibling.classList.remove("oculto");
+    actual.parentElement.nextElementSibling.classList.add("visible"); //el togle nos servirta para el boton falso de siguiente check check
 }
 
 //validacion nombre
@@ -37,8 +37,44 @@ $("#num").addEventListener("change", function(){
 //validación email
 $("#email").addEventListener("change", function(){
     if(this.value.includes("@g.educaand.es")){
-         revelarSig(this);
+        revelarSig(this);
     }else{
         alert("Correo no válido. Debe acabar en @g.educaand.es")
+    }
+});
+
+//validacion Fecha
+$("#fecha").addEventListener("change", function(){
+    const hoy = new Date();
+    const nac = this.value;
+    var edad = hoy.getFullYear()-nac.getFullYear();
+
+    if(hoy.getMonth()-nac.getMonth()<0 || (hoy.getMonth()-nac.getMonth()==0 && (hoy.getDay()-nac.getDay()<0))){  //esto es un lio,en meses si hoy menos ayer 
+        edad--;                                                                             //en plan es agosto menos septiembre q nació es <0 y si es el mismo mes hace lo mismo en dias
+    }
+
+    if(edad>=18){
+        revelarSig(this);
+    }else{
+        alert("Debe ser mayor de edad.")
+    }
+});
+var pass;
+//validacion contraseña
+$("#pass").addEventListener("change", function(){
+    if (this.value.length <8) {
+        alert("Debe tener al menos 8 caracteres el nombre");
+    }else{
+        pass= this.value;
+        revelarSig(this);
+    }
+});
+
+//validacion contrañesa 2
+$("#pass2").addEventListener("change", function(){
+    if(this.value != pass){
+        alert("Debe repetir la misma contraeña");
+    }else{
+        revelarSig(this);
     }
 });
