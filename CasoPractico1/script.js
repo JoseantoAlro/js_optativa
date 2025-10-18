@@ -64,7 +64,7 @@ $("#fecha").addEventListener("change", function () {
 
 
 //validacion contraseña
-var pass;
+var pass;                                               //pide una contraseña de 8 caracteres y la guarda
 $("#pass").addEventListener("change", function () {
     if (this.value.length < 8) {
         alert("Debe tener al menos 8 caracteres el nombre");
@@ -74,7 +74,7 @@ $("#pass").addEventListener("change", function () {
     }
 });
 
-//validacion repetir contrañesa
+//validacion repetir contrañesa                     //comprueba si la contraseña es iguala la anterior
 $("#pass2").addEventListener("change", function () {
     if (this.value != pass) {
         alert("Debe repetir la misma contraeña");
@@ -83,7 +83,7 @@ $("#pass2").addEventListener("change", function () {
     }
 });
 
-//validacion DNI
+//validacion DNI                                    //comprueba q sean 9 caractereres( 8 nums y una letra)
 $("#dni").addEventListener("change", function () {
     let num = Number(this.value.substring(0, 8));
     let letra = (this.value.charAt(8));
@@ -94,7 +94,7 @@ $("#dni").addEventListener("change", function () {
     }
 })
 
-//validacion check activo
+//validacion check activo                           //evita desbloquear el checkbox para no recibir la publi
 $("#publi").addEventListener("change", function () {
     if (this.checked) {
         this.disabled = true;
@@ -102,7 +102,7 @@ $("#publi").addEventListener("change", function () {
     }
 });
 
-//validación boton final
+//validación boton final                                //resetea todo el formlario(clases visible-oculto y los valores)
 $("#boton").addEventListener("click", function () {
     $$("label").forEach(function (label) {
         label.classList.remove("visible");
