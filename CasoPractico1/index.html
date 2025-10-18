@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="estilos.css">
-    
+    <script defer src="script.js"></script>
 </head>
 <body>
     <form action=""class="formulario">
-        <h2>formulario</h2>
+        <h2>Formulario</h2>
         <label>
             <input type="text" name="nombre" placeholder="Introduzca su nombre" id="nombre" class="input">
             <b class="subtit">nombre</b>
@@ -27,25 +27,29 @@
             <b class="subtit">email</b>
         </label>
         <label class="oculto">
-            <input type="date" name="fecha" placeholder="" id="fecha" class="input">
+            <input type="date" name="fecha" placeholder="" id="fecha" class="input fecha">
             <b class="subtit">f. nacimiento</b>
         </label>
         <label class="oculto">
-            <input type="password" name="password" placeholder="Introduzca una contraseña" id="pass" class="input">
+            <input type="password" name="password" placeholder="Introduzca una contraseña" id="pass" class="input ">
+            <b class="subtit">contraseña</b>
         </label>
         <label class="oculto">
             <input type="password" name="pasword" placeholder="Repita la contraseña" id="pass2" class="input">
+            <b class="subtit">repetir cont.</b>
         </label>
         <label class="oculto">
-            <input type="text" name="number" placeholder="Introduzca su nombre" id="veremos" class="input">
+            <input type="text" name="dni" placeholder="Introduzca su DNI" id="dni" class="input">
+            <b class="subtit">DNI</b>
         </label>
         <label class="oculto">
-            <input type="text" name="nombre" placeholder="Introduzca su nombre" id="veremos2" class="input oculto">
+            <span class="subtit publi">Acepto recibir publicidad en el correo falicitado anteriormente</span>
+            <input type="checkbox" name="publi" id="publi" class="input check">
         </label>
         <label class="oculto">
-            <input type="checkbox" name="nombre" placeholder="Introduzca su nombre" id="veremos3" class="input">
+            <input type="button" value="Finalizar" id="boton" onclick="alert('Enhorabuena por completar el formulario')" class="input boton">
         </label>
     </form>
 </body>
-<script defer src="script.js"></script>
+
 </html>

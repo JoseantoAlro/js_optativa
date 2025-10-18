@@ -1,80 +1,118 @@
-function $(selector){
+function $(selector) {                                   //$ selecciona 1 y $$ selecciona todos
     return document.querySelector(selector);
 }
+function $$(selector) {
+    return document.querySelectorAll(selector);
+}
 
-function revelarSig(actual){ 
+function revelarSig(actual) {                               //revela el siguiente label completo(cambia la opacidad)
     actual.parentElement.nextElementSibling.classList.remove("oculto");
-    actual.parentElement.nextElementSibling.classList.add("visible"); //el togle nos servirta para el boton falso de siguiente check check
+    actual.parentElement.nextElementSibling.classList.add("visible");
 }
 
 //validacion nombre
-$("#nombre").addEventListener("change", function(){
-    if (this.value.length <4) {
+$("#nombre").addEventListener("change", function () {
+    if (this.value.length < 4) {
         alert("Debe tener al menos 4 caracteres el nombre");
-    }else{
+    } else {
         revelarSig(this);
     }
 });
 
 //validacion apellidos
-$("#apellidos").addEventListener("change", function(){
-    if(this.value.split(" ").length != 2){
+$("#apellidos").addEventListener("change", function () {
+    if (this.value.split(" ").length != 2) {
         alert("Debe ser 2 apellidos");
-    }else{
+    } else {
         revelarSig(this);
     }
 });
 
 //validacion numero
-$("#num").addEventListener("change", function(){
-    if(Number.isInteger(Number(this.value)) && this.value.length ==9){
+$("#num").addEventListener("change", function () {        //que sea un numero y de solo 9 digitos
+    if (Number.isInteger(Number(this.value)) && this.value.length == 9) {
         revelarSig(this);
-    }else{
+    } else {
         alert("Introduzca un numero válido (9 digitos)")
     }
 });
 
 //validación email
-$("#email").addEventListener("change", function(){
-    if(this.value.includes("@g.educaand.es")){
+$("#email").addEventListener("change", function () {
+    if (this.value.includes("@g.educaand.es")) {
         revelarSig(this);
-    }else{
+    } else {
         alert("Correo no válido. Debe acabar en @g.educaand.es")
     }
 });
 
 //validacion Fecha
-$("#fecha").addEventListener("change", function(){
+$("#fecha").addEventListener("change", function () {
     const hoy = new Date();
-    const nac = this.value;
-    var edad = hoy.getFullYear()-nac.getFullYear();
+    const nac = new Date(this.value);
+    var edad = hoy.getFullYear() - nac.getFullYear();
 
-    if(hoy.getMonth()-nac.getMonth()<0 || (hoy.getMonth()-nac.getMonth()==0 && (hoy.getDay()-nac.getDay()<0))){  //esto es un lio,en meses si hoy menos ayer 
-        edad--;                                                                             //en plan es agosto menos septiembre q nació es <0 y si es el mismo mes hace lo mismo en dias
+    if (hoy.getMonth() - nac.getMonth() < 0 || (hoy.getMonth() - nac.getMonth() == 0 && (hoy.getDay() - nac.getDay() < 0))) {  //esto es complicado de entender, 
+        edad--;                                           //en resumen hace, por ejemplo, agosto(8) que estamos menos septiembre(9) que nació es <0, o si es el mismo mes(==0) hace lo mismo en dias
     }
-
-    if(edad>=18){
+    if (edad >= 18) {
         revelarSig(this);
-    }else{
+    } else {
         alert("Debe ser mayor de edad.")
     }
 });
-var pass;
+
+
 //validacion contraseña
-$("#pass").addEventListener("change", function(){
-    if (this.value.length <8) {
+var pass;
+$("#pass").addEventListener("change", function () {
+    if (this.value.length < 8) {
         alert("Debe tener al menos 8 caracteres el nombre");
-    }else{
-        pass= this.value;
+    } else {
+        pass = this.value;
         revelarSig(this);
     }
 });
 
-//validacion contrañesa 2
-$("#pass2").addEventListener("change", function(){
-    if(this.value != pass){
+//validacion repetir contrañesa
+$("#pass2").addEventListener("change", function () {
+    if (this.value != pass) {
         alert("Debe repetir la misma contraeña");
-    }else{
+    } else {
         revelarSig(this);
     }
+});
+
+//validacion DNI
+$("#dni").addEventListener("change", function () {
+    let num = Number(this.value.substring(0, 8));
+    let letra = (this.value.charAt(8));
+    if (this.value.length == 9 && Number.isInteger(num) && letra.match(/[A-Z]/)) {
+        revelarSig(this);
+    } else {
+        alert("DNI no válido (8 números y 1 letra mayúscula)");
+    }
+})
+
+//validacion check activo
+$("#publi").addEventListener("change", function () {
+    if (this.checked) {
+        this.disabled = true;
+        revelarSig(this);
+    }
+});
+
+//validación boton final
+$("#boton").addEventListener("click", function () {
+    $$("label").forEach(function (label) {
+        label.classList.remove("visible");
+        label.classList.add("oculto");
+    });
+    $$("input").forEach(function (input) {
+        input.value = "";
+    })
+    $("#publi").checked = false;
+    $("#publi").disabled = false;
+    $("#nombre").parentElement.classList.remove("oculto");
+    $("#nombre").parentElement.classList.add("visible");
 });
