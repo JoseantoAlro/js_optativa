@@ -13,7 +13,7 @@ function revelarSig(actual) {                               //revela el siguient
 //validacion nombre
 $("#nombre").addEventListener("change", function () {
     if (this.value.length < 4) {
-        alert("Debe tener al menos 4 caracteres el nombre");
+        alertaSpan("Debe tener al menos 4 caracteres el nombre");
     } else {
         revelarSig(this);
     }
