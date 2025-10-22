@@ -67,7 +67,7 @@ $("#fecha").addEventListener("change", function () {
 var pass;                                               //pide una contraseña de 8 caracteres y la guarda
 $("#pass").addEventListener("change", function () {
     if (this.value.length < 8) {
-        alert("Debe tener al menos 8 caracteres el nombre");
+        alert("Debe tener al menos 8 caracteres");
     } else {
         pass = this.value;
         revelarSig(this);
