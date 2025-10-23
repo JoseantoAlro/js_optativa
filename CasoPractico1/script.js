@@ -10,19 +10,37 @@ function revelarSig(actual) {                               //revela el siguient
     actual.parentElement.nextElementSibling.classList.add("visible");
 }
 
+function alertaSpan(actual, mensaje){                       //añade un elemento span dentro del elemento padre(label) con un mensaje y una clase llamada alerta
+    const span = document.createElement("span");
+    span.textContent=mensaje
+    span.classList.add("alerta");
+    actual.parentElement.appendChild(span); 
+}
+
+function limpiarmensajes(self){                             //comprueba si la alerta se envio anteriormente y la borra para redesplegarla y que no se repita
+    const span = self.parentElement.querySelector("span");
+    if (span){
+        span.remove();
+    }
+}
+
 //validacion nombre
 $("#nombre").addEventListener("change", function () {
+    limpiarmensajes(this);
     if (this.value.length < 4) {
-        alertaSpan("Debe tener al menos 4 caracteres el nombre");
+        alertaSpan(this,"Debe tener al menos 4 caracteres");
     } else {
         revelarSig(this);
     }
 });
 
+
+
 //validacion apellidos
 $("#apellidos").addEventListener("change", function () {
+    limpiarmensajes(this);
     if (this.value.split(" ").length != 2) {
-        alert("Debe ser 2 apellidos");
+        alertaSpan(this,"Debe ser 2 apellidos");
     } else {
         revelarSig(this);
     }
@@ -30,24 +48,27 @@ $("#apellidos").addEventListener("change", function () {
 
 //validacion numero
 $("#num").addEventListener("change", function () {        //que sea un numero y de solo 9 digitos
+    limpiarmensajes(this);
     if (Number.isInteger(Number(this.value)) && this.value.length == 9) {
         revelarSig(this);
     } else {
-        alert("Introduzca un numero válido (9 digitos)")
+        alertaSpan(this,"Introduzca un numero válido (9 digitos)")
     }
 });
 
 //validación email
 $("#email").addEventListener("change", function () {
+    limpiarmensajes(this);
     if (this.value.includes("@g.educaand.es")) {
         revelarSig(this);
     } else {
-        alert("Correo no válido. Debe acabar en @g.educaand.es")
+        alertaSpan(this,"Solo se admite correos @g.educaand.es")
     }
 });
 
 //validacion Fecha
 $("#fecha").addEventListener("change", function () {
+    limpiarmensajes(this);
     const hoy = new Date();
     const nac = new Date(this.value);
     var edad = hoy.getFullYear() - nac.getFullYear();
@@ -58,7 +79,7 @@ $("#fecha").addEventListener("change", function () {
     if (edad >= 18) {
         revelarSig(this);
     } else {
-        alert("Debe ser mayor de edad.")
+        alertaSpan(this,"Debe ser mayor de edad.")
     }
 });
 
@@ -66,8 +87,9 @@ $("#fecha").addEventListener("change", function () {
 //validacion contraseña
 var pass;                                               //pide una contraseña de 8 caracteres y la guarda
 $("#pass").addEventListener("change", function () {
+    limpiarmensajes(this);
     if (this.value.length < 8) {
-        alert("Debe tener al menos 8 caracteres");
+        alertaSpan(this,"Debe tener al menos 8 caracteres");
     } else {
         pass = this.value;
         revelarSig(this);
@@ -76,8 +98,9 @@ $("#pass").addEventListener("change", function () {
 
 //validacion repetir contrañesa                     //comprueba si la contraseña es iguala la anterior
 $("#pass2").addEventListener("change", function () {
+    limpiarmensajes(this);
     if (this.value != pass) {
-        alert("Debe repetir la misma contraeña");
+        alertaSpan(this,"Debe repetir la misma contraeña");
     } else {
         revelarSig(this);
     }
@@ -85,17 +108,19 @@ $("#pass2").addEventListener("change", function () {
 
 //validacion DNI                                    //comprueba q sean 9 caractereres( 8 nums y una letra)
 $("#dni").addEventListener("change", function () {
+    limpiarmensajes(this);
     let num = Number(this.value.substring(0, 8));
     let letra = (this.value.charAt(8));
     if (this.value.length == 9 && Number.isInteger(num) && letra.match(/[A-Z]/)) {
         revelarSig(this);
     } else {
-        alert("DNI no válido (8 números y 1 letra mayúscula)");
+        alertaSpan(this,"DNI no válido (8 números y 1 letra mayúscula)");
     }
 })
 
 //validacion check activo                           //evita desbloquear el checkbox para no recibir la publi
 $("#publi").addEventListener("change", function () {
+    limpiarmensajes(this);
     if (this.checked) {
         this.disabled = true;
         revelarSig(this);
