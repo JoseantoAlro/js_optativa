@@ -64,7 +64,7 @@ $("#email").addEventListener("change", function () {
     } else {
         alertaSpan(this,"Solo se admite correos @g.educaand.es")
     }
-});
+}); 
 
 //validacion Fecha
 $("#fecha").addEventListener("change", function () {
