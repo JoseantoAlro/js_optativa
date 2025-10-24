@@ -80,6 +80,8 @@ body {
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
+    gap:8px;
+    padding: 10px;
 }
 
 label {
@@ -94,14 +96,18 @@ label> :nth-child(1) {
     width: 90%;
     display: flex;
     justify-content: flex-start;
+    direction: ltr
 }
 label> :nth-child(2) {
-    width: 100%;
+    width: 78%;
     display: flex;
     justify-content: center;
-}
+    text-align: center;}
 label> :nth-child(3) {
     grid-column: span 2;
+}
+label input[type="button"] {
+  grid-column: span 2;
 }
 
 .input {
@@ -127,11 +133,6 @@ label> :nth-child(3) {
     color: rgb(95, 20, 20);
 }
 
-.subtit {
-    width: 30%;
-    padding: 0px 0px 0px 15px;
-}
-
 .fecha {
     width: 50%;
 }
@@ -140,7 +141,7 @@ label> :nth-child(3) {
     all: revert;
     appearance: none;
     position: relative;
-    width: 20px;
+    width: 20px !important;
     height: 20px;
     cursor: pointer;
 }

@@ -24,7 +24,9 @@ function limpiarmensajes(self){                             //comprueba si la al
     }
 }
 
-$(".toggle").addEventListener("click", function() {            //cambia la clase del body relacionada con la imagen de fondo
+
+ //cambia la clase del body relacionada con la imagen de fondo
+$(".toggle").addEventListener("click", function() {           
     $("body").classList.toggle("imagenDia");
     $("body").classList.toggle("imagenNoche");
 })
@@ -145,6 +147,7 @@ $("#boton").addEventListener("click", function () {
     })
     $("#publi").checked = false;
     $("#publi").disabled = false;
+    $("#diaNoche").classList.remove("oculto");
     $("#nombre").parentElement.classList.remove("oculto");
     $("#nombre").parentElement.classList.add("visible");
 });
