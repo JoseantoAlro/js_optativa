@@ -1,20 +1,77 @@
 body {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 0;
     height: 100vh;
+    width: 100vw;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-image: url("fotoStock.jpg");
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
- 
+
+}
+.imagenDia{
+    background-image: url("../CasoPractico1/recursos/fotoStock.jpg");
+    transition: 0.5s ease-in-out;
+    
+}
+.imagenNoche{
+    background-image: url("../CasoPractico1/recursos/fotoStockNoche.jpg");
+    transition: 0.5s ease-in-out;
+    color: white !important;
+}
+
+.toggleContainer {
+    top:10px;
+    left: 10px;
+    position: absolute;
+    width: 90px;
+    height: 30px;
+
+}
+
+.toggle {                           /* codigo basado en el codigo original de: https://www.auladiv.com/como_se_hace/toggle-switch-1.html */
+    position: absolute;
+    width: 0;
+    height: 0;
+    &+.switch {
+        position: relative;
+        display: block;
+        background: rgb(255, 255, 255);
+        width: 90px;
+        height: 30px;
+        cursor: pointer;
+        border-radius: 30px;
+        transition: 0.5s;
+    }
+    &:checked+.switch {
+        background: rgb(102, 100, 100);
+    }
+    &+.switch:before {
+        content: "";
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #ca9c05;
+        border-radius: 50%;
+        margin: 0px 2px;
+        left: 0%;
+        transition: 1s;
+    }
+
+    &:checked+.switch:before {
+        left: 97%;
+        transform: translate(calc(-100% - 2px), -50%);
+    }
+
 }
 
 .formulario {
     background-color: rgba(233, 233, 233, 0.1);
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.37);
+    box-shadow: 0 4px 30px rgba(255, 255, 255, 0.37);
     border: 1px solid rgba(255, 255, 255, 0.2);
     width: 325px;
     border-radius: 20px;
@@ -28,13 +85,23 @@ body {
 label {
     width: 100%;
     display: grid;
-    grid-template-columns:  repeat(2, 1fr);
-    direction: rtl; 
+    grid-template-columns: repeat(2, 1fr);
+    direction: rtl;
     align-items: center;
     justify-items: center;
 }
+label> :nth-child(1) {
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+}
+label> :nth-child(2) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 label> :nth-child(3) {
-  grid-column: span 2;
+    grid-column: span 2;
 }
 
 .input {
@@ -48,17 +115,18 @@ label> :nth-child(3) {
 }
 
 .oculto {
-    /*display: none;*/
-    opacity: 0;
+        opacity: 0;
 }
 
 .visible {
     opacity: 1;
     transition: 1s ease;
 }
-.alerta{
+
+.alerta {
     color: rgb(95, 20, 20);
 }
+
 .subtit {
     width: 30%;
     padding: 0px 0px 0px 15px;
@@ -103,6 +171,7 @@ label> :nth-child(3) {
     border-radius: 4px;
     cursor: pointer;
 }
+
 .boton:active {
-      filter: brightness(80%);
+    filter: brightness(80%);
 }

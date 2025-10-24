@@ -24,6 +24,12 @@ function limpiarmensajes(self){                             //comprueba si la al
     }
 }
 
+$(".toggle").addEventListener("click", function() {            //cambia la clase del body relacionada con la imagen de fondo
+    $("body").classList.toggle("imagenDia");
+    $("body").classList.toggle("imagenNoche");
+})
+
+
 //validacion nombre
 $("#nombre").addEventListener("change", function () {
     limpiarmensajes(this);
@@ -39,10 +45,11 @@ $("#nombre").addEventListener("change", function () {
 //validacion apellidos
 $("#apellidos").addEventListener("change", function () {
     limpiarmensajes(this);
-    if (this.value.split(" ").length != 2) {
-        alertaSpan(this,"Debe ser 2 apellidos");
-    } else {
+    if (this.value.split(" ").length == 2 ||this.value.split(" ").length == 1 ) {
         revelarSig(this);
+    } else {
+        alertaSpan(this,"Debe ser 1 o 2 apellidos");
+        
     }
 });
 

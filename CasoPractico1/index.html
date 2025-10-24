@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,16 @@
     <link rel="stylesheet" type="text/css" href="estilos.css">
     <script defer src="script.js"></script>
 </head>
-<body> 
-    <form action=""class="formulario">
+
+<body class="imagenDia">
+    <div class="toggleContainer">
+
+        <input type="checkbox" id="switch" class="toggle">
+
+        <label for="switch" class="switch"></label>
+
+    </div>
+    <form action="" class="formulario">
         <h2>Formulario</h2>
         <label>
             <input type="text" name="nombre" placeholder="Introduzca su nombre" id="nombre" class="input">
@@ -24,7 +33,7 @@
         </label>
         <label class="oculto">
             <input type="email" name="email" placeholder="email coorporativo" id="email" class="input">
-            <b class="subtit">email</b>
+            <b class="subtit">email coorporativo @g.educaand.es</b>
         </label>
         <label class="oculto">
             <input type="date" name="fecha" placeholder="" id="fecha" class="input fecha">
@@ -47,7 +56,8 @@
             <input type="checkbox" name="publi" id="publi" class="input check">
         </label>
         <label class="oculto">
-            <input type="button" value="Finalizar" id="boton" onclick="alert('Enhorabuena por completar el formulario')" class="input boton">
+            <input type="button" value="Finalizar" id="boton" onclick="alert('Enhorabuena por completar el formulario')"
+                class="input boton">
         </label>
     </form>
 </body>
