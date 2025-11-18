@@ -6,7 +6,7 @@ app.set('view engine', 'ejs');
 app.set('pruebas', __dirname+'/prueba');
 app.use(express.static(__dirname+'/public'));    //acceso a carpeta public pero con la ruta absoluta
 
-app.get('/pruebas', (req, res) => {
+app.get('/pruebas', (req, res) => {  //send envia reuqest info y render desde nuestro servidor o algo asi
   res.render("prueba", {titulo : "mi titulo dinamico"});
 })
 
