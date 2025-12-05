@@ -1,0 +1,30 @@
+<%- include("templates/cabecera", {subtitulo: "Panel de escuelas"})%>
+
+    <div class="container bg-info-subtle">
+        <table class="table ">
+            <thead class="thead-dark ">
+                <tr>
+                    <th scope="col" class=" bg-info-subtle">#</th>
+                    <th scope="col" class=" bg-info-subtle">Nombre</th>
+                    <th scope="col" class=" bg-info-subtle">Tipo</th>
+                    <th scope="col" class=" bg-info-subtle">Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (arrayEscuelas.length> 0) { %>
+                    <!--Haremos el foreach para recorrer el array-->
+                    <% arrayEscuelas.forEach(escuela => { %>
+                        <tr>
+                            <th scope="row" class=" bg-info-subtle"><%= escuela.id %></th>
+                            <td class=" bg-info-subtle"><%= escuela.nombre %></td>
+                            <td class=" bg-info-subtle"><%= escuela.tipo %></td>
+                            <td class=" bg-info-subtle"><%= escuela.descripcion %></td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+            </tbody>
+
+        </table>
+    </div>
+    
+<%- include("templates/footer") %>
