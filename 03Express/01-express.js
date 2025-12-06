@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 
 app.set('view engine', 'ejs');
-app.set('pruebas', __dirname+'/prueba');
+
 app.use(express.static(__dirname+'/public'));    //acceso a carpeta public pero con la ruta absoluta
 
 app.use('views', express.static(__dirname + '/views'));
