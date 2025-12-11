@@ -12,15 +12,26 @@ app.use('/', require('./router/rutas'));
 app.use('/contacto', require('./router/rutas'));
 app.use('/pokemon', require('./router/pokemon'));
 
-//app.get('/', (req, res) => {
-  //console.log(__dirname)  //pintar ruta en consola
-  //res.render("index", {titulo : "mi titulo dinamico"}) //renderizar el ejs
-//})
 
 //usar un html de public
 app.use((req,res) => {      //para cuando no encuentra una ruta
   res.status(404).sendFile(__dirname+"/public//html/404.html")
 })
+
+//Conexión a base de datos
+const mongoose = require('mongoose');
+//Variables que tendremos siempre:
+//Lo correcto será declararlas EN VARIABLES DE ENTORNO
+//para que nadie vea directamente nuestras credenciales
+const user = 'jalvrom2609DB';
+const password = 'INstituto012_';
+const dbname = 'pokemon';
+const uri = `mongodb+srv://${user}:${password}@clusterprueba.sjyco5a.mongodb.net/${dbname}?retryWrites=true&w=majority`;
+
+mongoose.connect(uri)
+  .then(() => console.log('Base de datos conectada'))
+  .catch(e => console.log(e))
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
