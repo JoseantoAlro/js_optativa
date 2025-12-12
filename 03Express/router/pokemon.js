@@ -7,7 +7,7 @@ router.get('/crear', (req, res) =>{
     res.render('crear') //Nueva vista que debemos crear
 })
 
-router.get('/:id', async(req, res) => { //El id vendrá por el GET (barra de direcciones)
+router.get('/pokemon/:id', async(req, res) => { //El id vendrá por el GET (barra de direcciones)
     const id = req.params.id //Recordemos que en la plantilla "pokemon.ejs" le pusimos
     //a este campo pokemon.id, por eso lo llamados con params.id
       try {
@@ -15,7 +15,7 @@ router.get('/:id', async(req, res) => { //El id vendrá por el GET (barra de dir
 							//Esta variable “Pokemon” está definida arriba con el “require”
         //Buscamos con Mongoose un único documento que coincida con el id indicado
         console.log(pokemonDB) //Para probarlo por consola
-        res.render('detalle', { //Para mostrar el objeto en la vista "detalle", que tenemos que crear
+        res.render('detalles', { //Para mostrar el objeto en la vista "detalle", que tenemos que crear
             pokemon: pokemonDB,
             error: false
         })
@@ -60,6 +60,32 @@ router.post('/', async (req, res) => {
 
         console.log('error', error)
 
+    }
+})
+
+router.delete('/:id', async (req, res) => {
+    const id = req.params.id;
+    console.log('id desde backend', id)
+    try {
+        //En la documentación de Mongoose podremos encontrar la
+        //siguiente función para eliminar
+        const pokemonDB = await Pokemon.findByIdAndDelete({ _id: id });
+        console.log(pokemonDB)
+        // https://stackoverflow.com/questions/27202075/expressjs-res-redirect-not-working-as-expected
+        // res.redirect('/pokemon') //Esto daría un error, tal y como podemos ver arriba
+        if (!pokemonDB) {
+            res.json({ 
+                estado: false,
+                mensaje: 'No se puede eliminar el Pokémon.'
+            })
+        } else {
+            res.json({
+                estado: true,
+                mensaje: 'Pokémon eliminado.'
+            })
+        } 
+    } catch (error) {
+        console.log(error)
     }
 })
 
