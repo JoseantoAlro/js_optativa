@@ -7,7 +7,7 @@ router.get('/crear', (req, res) =>{
     res.render('crear') //Nueva vista que debemos crear
 })
 
-router.get('/pokemon/:id', async(req, res) => { //El id vendrá por el GET (barra de direcciones)
+router.get('/:id', async(req, res) => { //El id vendrá por el GET (barra de direcciones)
     const id = req.params.id //Recordemos que en la plantilla "pokemon.ejs" le pusimos
     //a este campo pokemon.id, por eso lo llamados con params.id
       try {
@@ -21,7 +21,7 @@ router.get('/pokemon/:id', async(req, res) => { //El id vendrá por el GET (barr
         })
     } catch (error) { //Si el id indicado no se encuentra
         console.log('Se ha producido un error', error)
-        res.render('detalle', { //Mostraremos el error en la vista "detalle"
+        res.render('detalles', { //Mostraremos el error en la vista "detalle"
             error: true,
             mensaje: 'Pokemon no encontrado!'
         })
@@ -88,5 +88,29 @@ router.delete('/:id', async (req, res) => {
         console.log(error)
     }
 })
+
+router.put('/:id', async (req, res) => {
+    const id = req.params.id;
+    const body = req.body;
+    console.log(id)
+    console.log('body', body)
+    try {
+        const pokemonDB = await Pokemon.findByIdAndUpdate(
+            id, body, { useFindAndModify: false }
+        )
+        console.log(pokemonDB)
+        res.json({
+            estado: true,
+            mensaje: 'Pokémon editado'
+        })
+    } catch (error) {
+        console.log(error)
+        res.json({
+            estado: false,
+            mensaje: 'Problema al editar el Pokémon'
+        })
+    }
+})
+
 
 module.exports = router;
