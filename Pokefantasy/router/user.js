@@ -3,13 +3,14 @@ const router = express.Router();
 const User = require('../models/user');
 
 
+
 router.get('/crear', (req, res) =>{
     res.render('crear') //Nueva vista que debemos crear
 })
 
 router.get('/:id', async(req, res) => { //El id vendrá por el GET (barra de direcciones)
-    const id = req.params.id //Recordemos que en la plantilla "pokemon.ejs" le pusimos
-    //a este campo pokemon.id, por eso lo llamados con params.id
+    const id = req.params.id //Recordemos que en la plantilla "user.ejs" le pusimos
+    //a este campo user.id, por eso lo llamados con params.id
       try {
         const userDB = await User.findOne({ _id: id }) 
         console.log(userDB) //Para probarlo por consola
@@ -28,13 +29,17 @@ router.get('/:id', async(req, res) => { //El id vendrá por el GET (barra de dir
 
 router.get('/', async (req, res) => {
     try {
-        //Le pondremos arrayPokemonDB para diferenciar
+        //Le pondremos arrayUserDB para diferenciar
         //los datos que vienen de la base de datos
-        //con respecto al arrayPokemon que tenemos EN LA VISTA
-        const arrayPokemonDB = await User.find();
-        console.log(arrayPokemonDB);
-        res.render("pokemon", { 
-            arrayPokemon: arrayPokemonDB
+        //con respecto al arrayUser que tenemos EN LA VISTA
+
+        console.log("Consultando colección:", User.collection.name);
+
+        const arrayUserDB = await User.find();
+        console.log("Resultados:", arrayUserDB);
+        console.log(arrayUserDB);
+        res.render("users", { 
+            arrayUser: arrayUserDB
         })
     } catch (error) {
         console.error(error)
@@ -50,9 +55,9 @@ router.post('/', async (req, res) => {
 
     try {
 
-        const pokemonDB = new User(body) // Creamos un nuevo Pokemon, gracias a Mongoose
-        await pokemonDB.save() // Lo guardamos con .save(), gracias a Mongoose
-        res.redirect('/pokemon') // Volvemos al listado
+        const userDB = new User(body) // Creamos un nuevo usuario, gracias a Mongoose
+        await userDB.save() // Lo guardamos con .save(), gracias a Mongoose
+        res.redirect('/user') // Volvemos al listado
 
     } catch (error) {
 
@@ -67,19 +72,19 @@ router.delete('/:id', async (req, res) => {
     try {
         //En la documentación de Mongoose podremos encontrar la
         //siguiente función para eliminar
-        const pokemonDB = await User.findByIdAndDelete({ _id: id });
-        console.log(pokemonDB)
+        const userDB = await User.findByIdAndDelete({ _id: id });
+        console.log(userDB)
         // https://stackoverflow.com/questions/27202075/expressjs-res-redirect-not-working-as-expected
-        // res.redirect('/pokemon') //Esto daría un error, tal y como podemos ver arriba
-        if (!pokemonDB) {
+        // res.redirect('/user') //Esto daría un error, tal y como podemos ver arriba
+        if (!userDB) {
             res.json({ 
                 estado: false,
-                mensaje: 'No se puede eliminar el Pokémon.'
+                mensaje: 'No se puede eliminar el usuario.'
             })
         } else {
             res.json({
                 estado: true,
-                mensaje: 'Pokémon eliminado.'
+                mensaje: 'Usuario eliminado.'
             })
         } 
     } catch (error) {
@@ -93,19 +98,19 @@ router.put('/:id', async (req, res) => {
     console.log(id)
     console.log('body', body)
     try {
-        const pokemonDB = await User.findByIdAndUpdate(
+        const userDB = await User.findByIdAndUpdate(
             id, body, { useFindAndModify: false }
         )
-        console.log(pokemonDB)
+        console.log(userDB)
         res.json({
             estado: true,
-            mensaje: 'Pokémon editado'
+            mensaje: 'usuario editado'
         })
     } catch (error) {
         console.log(error)
         res.json({
             estado: false,
-            mensaje: 'Problema al editar el Pokémon'
+            mensaje: 'Problema al editar el usuario'
         })
     }
 })
