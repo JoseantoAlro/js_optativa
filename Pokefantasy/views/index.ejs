@@ -1,5 +1,13 @@
-<%- include("templates/cabecera", {subtitulo: "va bien"} )%>
-    <h1>Estamos en INDEX</h1>
-    <h2><%= titulo %></h2>
+<%- include("templates/cabecera", {subtitulo: ""} )%>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="text-center">
+            <h1 class="display-3 fw-bold mb-4">Base de Datos Pokefantasy</h1>
+            <p class="lead mb-5 text-secondary">Accede a la gestión de entrenadores, saldos y puntos.</p>
+            
+            <a href="/users" class="btn btn-dark btn-lg px-5 py-3 shadow">
+                Entrar a Usuarios
+            </a>
+        </div>
+    </div>
 
 <%- include("templates/footer") %>

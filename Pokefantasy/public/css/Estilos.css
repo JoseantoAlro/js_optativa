@@ -1,0 +1,43 @@
+.bg-1{
+    background-color: #AFA9D9 ;
+}
+.bg-2{
+    background-color: #837bba;
+}
+
+.icono{
+    width: 50px;
+    height: auto;
+}
+
+.avatar-label {
+    width: 160px;  /* Tamaño fijo de ancho */
+    height: 180px; /* Tamaño fijo de alto */
+    display: flex;
+    align-items: center;    /* Centra la imagen verticalmente dentro del cuadro */
+    justify-content: center; /* Centra la imagen horizontalmente dentro del cuadro */
+    cursor: pointer;
+    border-radius: 8px;     /* Bordes redondeados para el cuadro */
+    transition: background-color 0.3s;
+}
+
+/* La imagen dentro del cuadro fijo */
+.avatar-img {
+    width: 160px;  /* La imagen es un poco más pequeña que el cuadro */
+    height: 160px;
+    object-fit: contain; /* Mantiene la proporción de la foto sin estirarla */
+    background: whitesmoke !important;
+}
+
+/* Cuando el usuario selecciona la opción */
+.btn-check:checked + .avatar-img {
+    /* En lugar de pintar la imagen, pintamos el fondo del LABEL */
+    /* Pero como el CSS selector + solo afecta al hermano (img), 
+       aplicaremos el estilo directamente a la imagen con un padding */
+    border-color: #003d7a !important;
+    border-width: 1px !important;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2)!important;
+    background-color: #add8e6 !important; 
+    border-radius: 8px;
+    padding: 5px; /* Crea el efecto de que el fondo azul es más grande que la foto */
+}

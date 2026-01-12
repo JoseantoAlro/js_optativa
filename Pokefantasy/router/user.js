@@ -8,24 +8,6 @@ router.get('/crear', (req, res) =>{
     res.render('crear') //Nueva vista que debemos crear
 })
 
-router.get('/:id', async(req, res) => { //El id vendrá por el GET (barra de direcciones)
-    const id = req.params.id //Recordemos que en la plantilla "user.ejs" le pusimos
-    //a este campo user.id, por eso lo llamados con params.id
-      try {
-        const userDB = await User.findOne({ _id: id }) 
-        console.log(userDB) //Para probarlo por consola
-        res.render('detalles', { //Para mostrar el objeto en la vista "detalle", que tenemos que crear
-            user: userDB,
-            error: false
-        })
-    } catch (error) { //Si el id indicado no se encuentra
-        console.log('Se ha producido un error', error)
-        res.render('detalles', { //Mostraremos el error en la vista "detalle"
-            error: true,
-            mensaje: 'usuario no encontrado'
-        })
-    }
-})
 
 router.get('/', async (req, res) => {
     try {
@@ -57,7 +39,8 @@ router.post('/', async (req, res) => {
 
         const userDB = new User(body) // Creamos un nuevo usuario, gracias a Mongoose
         await userDB.save() // Lo guardamos con .save(), gracias a Mongoose
-        res.redirect('/user') // Volvemos al listado
+        
+        res.redirect('/users'); // Volvemos al listado
 
     } catch (error) {
 
@@ -116,4 +99,22 @@ router.put('/:id', async (req, res) => {
 })
 
 
+router.get('/:id', async(req, res) => { //El id vendrá por el GET (barra de direcciones)
+    const id = req.params.id //Recordemos que en la plantilla "user.ejs" le pusimos
+    //a este campo user.id, por eso lo llamados con params.id
+      try {
+        const userDB = await User.findOne({ _id: id }) 
+        console.log(userDB) //Para probarlo por consola
+        res.render('detalles', { //Para mostrar el objeto en la vista "detalle", que tenemos que crear
+            user: userDB,
+            error: false
+        })
+    } catch (error) { //Si el id indicado no se encuentra
+        console.log('Se ha producido un error', error)
+        res.render('detalles', { //Mostraremos el error en la vista "detalle"
+            error: true,
+            mensaje: 'usuario no encontrado'
+        })
+    }
+})
 module.exports = router;

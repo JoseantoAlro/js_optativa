@@ -1,10 +1,28 @@
-<%- include("templates/cabecera", {subtitulo: 'Nuevo Pokemon' }) %>
+<%- include("templates/cabecera", {subtitulo: 'Nuevo Usuario' }) %>
     <div class="container">
-        <h1>Crear nuevo Pokemon</h1>
-        <form action="/pokemon" class="my-2" method="POST">
-            <input type="text" placeholder="Nombre Pokemon" class="form-control my-2" name="nombre">
-            <input type="text" placeholder="Tipo Pokemon" class="form-control my-2" name="tipo">
-            <input type="text" placeholder="Descripción Pokemon" class="form-control my-2" name="descripcion">
+        <h1>Crear nuevo usuario</h1>
+        <form action="/users" class="my-2" method="POST">
+            <input type="text" placeholder="Nombre" class="form-control my-2" name="nombre">
+            <input type="text" placeholder="Apodo" class="form-control my-2" name="apodo">
+
+            <label class="form-label fw-bold mt-2">Selecciona tu avatar:</label>
+            <div class="row row-cols-4 g-2 mb-3 text-center">
+                <% for(let i=1; i<=8; i++) { %> 
+                    <div class="col d-flex justify-content-center">
+                        <label class="avatar-label">
+                            <input type="radio" name="foto" value="<%= i %>" class="btn-check" id="foto<%= i %>" required>
+                            
+                            <img src="/images/<%= i %>.png" 
+                                alt="Avatar <%= i %>" 
+                                class="img-thumbnail avatar-img">
+                        </label>
+                    </div>
+                <% } %>
+            </div>
+            
+            <input type="text" placeholder="Correo" class="form-control my-2" name="correo">
+            <input type="number" placeholder="saldo" class="form-control my-2" name="saldo">
+            <input type="number" placeholder="puntos" class="form-control my-2" name="puntos">
             <button type="submit" class="btn btn-dark btn-block">
                 Agregar
             </button>

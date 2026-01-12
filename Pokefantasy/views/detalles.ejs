@@ -1,28 +1,56 @@
-<%- include("templates/cabecera", {subtitulo: 'Detalles del Pokemon' }) %>
+<%- include("templates/cabecera", {subtitulo: 'Detalles del usuario' }) %>
     <div class="container">
         <% if (error) { %>
             <%= mensaje %> 
             <a 
-                href="/pokemon"
+                href="/user"
                 class="btn btn-dark btn-block my-2"
             >
                 Volver
             </a>
         <% } %>
         <% if (!error) { %>
-                        <form id="editar" data-id="<%= pokemon.id %>">
-                            <input type="text" value="<%= pokemon.nombre %>" class="form-control my-2" name="nombre"
+                        <form id="editar" data-id="<%= user.id %>">
+                            <input type="text" value="<%= user.nombre %>" class="form-control my-2" name="nombre"
                                 id="nombreInput">
-                            <input type="text" value="<%= pokemon.tipo %>" class="form-control my-2" name="tipo"
-                                id="tipoInput">
-                            <input type="text" value="<%= pokemon.descripcion %>" class="form-control my-2"
-                                name="descripcion" id="descripcionInput">
+                            <input type="text" value="<%= user.apodo %>" class="form-control my-2" name="apodo"
+                                id="apodoInput">
+                            <div class="row row-cols-4 g-2 mb-3 text-center">
+
+                            <% for(let i=1; i<=8; i++) { %> 
+                                <div class="col d-flex justify-content-center">
+                                    <label class="avatar-label">
+                                        <input type="radio" 
+                                            name="foto" 
+                                            value="<%= i %>" 
+                                            class="btn-check" 
+                                            id="foto<%= i %>" 
+                                            <%= user.foto == i ? 'checked' : '' %> 
+                                            required>
+                                        
+                                        <img src="/images/<%= i %>.png" 
+                                            alt="Avatar <%= i %>" 
+                                            class="img-thumbnail avatar-img">
+                                    </label>
+                                </div>
+                            <% } %>
+                        </div>
+
+                        
+                            <input type="text" value="<%= user.correo %>" class="form-control my-2" name="correo"
+                                id="correoInput">
+                            <input type="number" value="<%= user.saldo %>" class="form-control my-2" name="saldo"
+                                id="saldoInput">
+                            <input type="number" value="<%= user.puntos %>" class="form-control my-2" name="puntos"
+                                id="puntosInput">
+
+
                             <button class="btn btn-warning btn-sm" type="submit">
                                 Editar
                             </button>
                         </form>
                         <hr>
-                        <button class="btn btn-danger btn-sm" data-id="<%= pokemon.id %>">
+                        <button class="btn btn-danger btn-sm" data-id="<%= user.id %>">
                             Eliminar
                         </button>
 <% } %>
@@ -34,13 +62,13 @@
                 console.log(btnEliminar.dataset.id)
                 try {
                     // https://developer.mozilla.org/es/docs/Web/API/HTMLElement/dataset
-                    const data = await fetch(`/pokemon/${btnEliminar.dataset.id}`, {
+                    const data = await fetch(`/users/${btnEliminar.dataset.id}`, {
                         method: 'delete'
                     })
                     const res = await data.json()
                     console.log(res)
                     if (res.estado) {
-                        window.location.href = '/pokemon'
+                        window.location.href = '/users'
                     } else {
                         console.log(res)
                     }
@@ -53,19 +81,23 @@
             formEditar.addEventListener('submit', async (e) => {
                 e.preventDefault()
                 const nombre = formEditar.elements['nombre'].value
-                const tipo = formEditar.elements['tipo'].value
-                const descripcion = formEditar.elements['descripcion'].value
+                const apodo = formEditar.elements['apodo'].value
+                const foto = formEditar.elements['foto'].value
+                const correo = formEditar.elements['correo'].value
+                const saldo = formEditar.elements['saldo'].value
+                const puntos = formEditar.elements['puntos'].value
+
                 const id = formEditar.dataset.id
-                const data = await fetch(`/pokemon/${id}`, {
+                const data = await fetch(`/users/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ nombre, tipo, descripcion })
+                    body: JSON.stringify({ nombre, apodo, foto, correo, saldo, puntos })
                 })
                 const res = await data.json()
                 if (res.estado) {
-                    window.location.href = '/pokemon'
+                    window.location.href = '/users'
                 } else {
                     console.log(res)
                 }
